@@ -25,10 +25,11 @@ public class Dictionary {
     private String targetLanguage;
     private String description;
 
-    @OneToMany(mappedBy = "user",
-        fetch = FetchType.LAZY,
-        cascade = CascadeType.ALL)
-    List<Word> words;
+    @OneToMany(mappedBy = "dictionary",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Word> words = new ArrayList<>();
 
     public void addWord(Word word){
         words.add(word);

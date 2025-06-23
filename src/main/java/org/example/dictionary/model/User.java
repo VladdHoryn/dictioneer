@@ -22,12 +22,12 @@ public class User {
         cascade = CascadeType.ALL)
     List<Dictionary> dictionaries = new ArrayList<>();
 
-    public void addUser(Dictionary dictionary){
+    public void addDictionary(Dictionary dictionary){
         dictionaries.add(dictionary);
         dictionary.setUser(this);
     }
 
-    public void removeUser(Dictionary dictionary){
+    public void removeDictionary(Dictionary dictionary){
         dictionaries.remove(dictionary);
         dictionary.setUser(null);
     }
