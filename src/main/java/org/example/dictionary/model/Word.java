@@ -9,16 +9,16 @@ import lombok.Data;
 public class Word {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long wordId;
+    protected long wordId;
 
     @ManyToOne
     @JoinColumn(name = "dictionary_id")
     @JsonIgnore
-    private Dictionary dictionary;
+    protected Dictionary dictionary;
 
-    private String word;
-    private String translation;
-    private String grammaticalCategory;
-    private String description;
-    private String complexity;
+    protected String word;
+    protected String translation;
+    protected String grammaticalCategory;
+    protected String description;
+    protected String complexity;
 }
