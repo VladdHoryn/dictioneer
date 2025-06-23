@@ -7,6 +7,8 @@ import org.example.dictionary.repository.UserRepository;
 import org.example.dictionary.repository.WordRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Data
 public class UserService {
@@ -26,6 +28,14 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         userRepository.delete(user); // CascadeType.ALL подбає про Dictionary + Word
+    }
+    public List<User> getAll(){
+        return userRepository.findAll();
+    }
+
+    public User getById(Long UserId){
+        return userRepository.findById(UserId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
 }
