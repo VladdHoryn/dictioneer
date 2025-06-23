@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<h1>All Users</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Password</th>
+    </tr>
+    <tr th:each="user : ${userList}">
+        <td th:text="${userList.id}">Id</td>
+        <td th:text="${userList.name}">Name</td>
+        <td th:text="${userList.password}">Age</td>
+    </tr>
+</table>
+
+</body>
+</html>
