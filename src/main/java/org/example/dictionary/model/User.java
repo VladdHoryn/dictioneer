@@ -12,10 +12,10 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
+    protected long userId;
 
-    private String name;
-    private String password;
+    protected String name;
+    protected String password;
 
     @OneToMany(mappedBy = "user",
         fetch = FetchType.LAZY,
