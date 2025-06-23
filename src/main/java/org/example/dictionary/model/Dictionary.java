@@ -13,23 +13,23 @@ import java.util.Objects;
 public class Dictionary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long dictionaryId;
+    protected long dictionaryId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore
-    private User user;
+    protected User user;
 
-    private String name;
-    private String sourceLanguage;
-    private String targetLanguage;
-    private String description;
+    protected String name;
+    protected String sourceLanguage;
+    protected String targetLanguage;
+    protected String description;
 
     @OneToMany(mappedBy = "dictionary",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<Word> words = new ArrayList<>();
+    protected List<Word> words = new ArrayList<>();
 
     public void addWord(Word word){
         words.add(word);
@@ -57,5 +57,9 @@ public class Dictionary {
     @Override
     public int hashCode() {
         return Objects.hash(dictionaryId);
+    }
+
+    public Long getUserId(){
+        return this.user.getUserId();
     }
 }

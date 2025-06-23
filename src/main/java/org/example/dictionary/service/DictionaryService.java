@@ -8,6 +8,8 @@ import org.example.dictionary.repository.UserRepository;
 import org.example.dictionary.repository.WordRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Data
 public class DictionaryService {
@@ -32,5 +34,14 @@ public class DictionaryService {
                 .orElseThrow(() -> new RuntimeException("Dictionary not found"));
 
         dictionaryRepository.delete(dictionary);
+    }
+
+    public List<Dictionary> getAll(){
+        return dictionaryRepository.findAll();
+    }
+
+    public Dictionary getById(Long dictionaryId){
+        return dictionaryRepository.findById(dictionaryId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

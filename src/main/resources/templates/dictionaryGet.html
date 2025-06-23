@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dictionaries</title>
+</head>
+<body>
+<h1>All Dictionaries</h1>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Password</th>
+  </tr>
+  <tr th:each="dictionary : ${dictionaryList}">
+    <td th:text="${dictionary.dictionaryId}">Id</td>
+    <td th:text="${dictionary.name}">Name</td>
+  </tr>
+</table>
+
+</body>
+</html>
