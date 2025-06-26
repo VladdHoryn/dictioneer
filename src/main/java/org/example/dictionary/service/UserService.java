@@ -17,11 +17,13 @@ public class UserService {
     public void addUser(User user){
         userRepository.save(user);
     }
-    public void deleteUser(User user) {
-        for(var dictionary : user.getDictionaries()){
-            user.removeDictionary(dictionary);
-        }
-        userRepository.delete(user);
+    public void updateUser(Long userId, User user){
+        User userToChange = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Uer with such ID was not found"));
+
+        userToChange.setName(user.getName());
+        userToChange.setPassword(user.getPassword());
+
+        userRepository.save(userToChange);
     }
     public void deleteUserById(Long userId) {
         User user = userRepository.findById(userId)

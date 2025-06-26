@@ -18,17 +18,27 @@ public class WordService {
     private final DictionaryRepository dictionaryRepository;
     private final WordRepository wordRepository;
 
-    public Word addWordToDictionary(Long dictionaryId, Word word){
+    public void addWordToDictionary(Long dictionaryId, Word word){
         Dictionary dictionary = dictionaryRepository.findById(dictionaryId)
                 .orElseThrow(() -> new RuntimeException("Word not found"));
 
         dictionary.addWord(word);
 
-        return wordRepository.save(word);
+        wordRepository.save(word);
     }
-    public void deleteWord(Word word){
-        wordRepository.delete(word);
+    public void updateWord(Long wordId, Word word){
+        Word wordToChange = wordRepository.findById(wordId)
+                .orElseThrow(() -> new RuntimeException("Word with such ID was not found"));
+
+        wordToChange.setWord(word.getWord());
+        wordToChange.setTranslation(word.getTranslation());
+        wordToChange.setGrammaticalCategory(word.getGrammaticalCategory());
+        wordToChange.setDescription(word.getDescription());
+        wordToChange.setComplexity(word.getComplexity());
+
+        wordRepository.save(wordToChange);
     }
+
     public void deleteWordById(Long wordId){
         Word word = wordRepository.findById(wordId)
                 .orElseThrow(() -> new RuntimeException("Word not found"));

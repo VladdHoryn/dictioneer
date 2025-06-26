@@ -16,18 +16,23 @@ public class DictionaryService {
     private final UserRepository userRepository;
     private final DictionaryRepository dictionaryRepository;
 
-    public Dictionary addDictionaryToUser(Long userId, Dictionary dictionary){
+    public void addDictionaryToUser(Long userId, Dictionary dictionary){
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
         user.addDictionary(dictionary);
 
-        return dictionaryRepository.save(dictionary);
+        dictionaryRepository.save(dictionary);
     }
-    public void deleteDictionary(Dictionary dictionary) {
-        for(var word : dictionary.getWords()){
-            dictionary.removeWord(word);
-        }
-        dictionaryRepository.delete(dictionary);
+    public void updateDictionary(Long dictionaryId, Dictionary dictionary){
+        Dictionary dictionaryToChange = dictionaryRepository.findById(dictionaryId)
+                .orElseThrow(() -> new RuntimeException("Dictionary with such ID was not found"));
+
+        dictionaryToChange.setName(dictionary.getName());
+        dictionaryToChange.setSourceLanguage(dictionary.getSourceLanguage());
+        dictionaryToChange.setTargetLanguage(dictionary.getTargetLanguage());
+        dictionaryToChange.setDescription(dictionary.getDescription());
+
+        dictionaryRepository.save(dictionaryToChange);
     }
     public void deleteDictionaryById(Long dictionaryId) {
         Dictionary dictionary = dictionaryRepository.findById(dictionaryId)
