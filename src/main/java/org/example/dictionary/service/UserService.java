@@ -34,10 +34,19 @@ public class UserService {
     public List<User> getAll(){
         return userRepository.findAll();
     }
-
     public User getById(Long userId){
         return userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public Boolean authorise(User user){
+        List<User> users = userRepository.findAll();
+
+        for(User currentUser : users){
+            if(currentUser.getName().equals(user.getName()) && currentUser.getPassword().equals(user.getPassword()))
+                return true;
+        }
+        return false;
     }
 
 }

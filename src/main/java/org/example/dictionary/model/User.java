@@ -15,6 +15,7 @@ public class User {
     protected long userId;
 
     protected String name;
+    protected String email;
     protected String password;
 
     @OneToMany(mappedBy = "user",
