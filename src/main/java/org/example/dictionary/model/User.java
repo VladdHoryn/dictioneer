@@ -30,6 +30,12 @@ public class User {
         this.password = passwordEncoder.encode(password);
     }
 
+    public void setPassword(String password){
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        this.password = passwordEncoder.encode(password);
+    }
+
     @OneToMany(mappedBy = "user",
         fetch = FetchType.LAZY,
         cascade = CascadeType.ALL)
