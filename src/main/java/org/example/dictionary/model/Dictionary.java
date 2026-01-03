@@ -2,6 +2,9 @@ package org.example.dictionary.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -12,17 +15,24 @@ import java.util.Objects;
 @Data
 public class Dictionary {
     @Id
+    @NotEmpty(message = "Dictionary Id can not be null")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long dictionaryId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore
+    @NotEmpty(message = "Dictionary required to have user")
     protected User user;
 
+    @NotBlank(message = "Name can not be null")
+    @Size(max = 30, message = "Name can not be over 30 symbols")
     protected String name;
+    @NotBlank(message = "Source language can not be null")
     protected String sourceLanguage;
+    @NotBlank(message = "Target language can not be null")
     protected String targetLanguage;
+    @Size(min = 0, max = 200, message = "description can not be over 200 symbols")
     protected String description;
 
     @OneToMany(mappedBy = "dictionary",
