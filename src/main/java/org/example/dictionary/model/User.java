@@ -27,7 +27,6 @@ public class User {
     protected String email;
 
     @NotBlank(message = "Password can not be null")
-    @Size(min = 8, message = "Password has to be maro than 8 symbols")
     protected String password;
 
     @NotNull
