@@ -14,10 +14,8 @@ import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class User {
     @Id
-    @NotEmpty(message = "User Id can not be null")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long userId;
 
@@ -32,18 +30,49 @@ public class User {
     @Size(min = 8, message = "Password has to be maro than 8 symbols")
     protected String password;
 
-    User(String name, String email, String password){
+    @NotNull
+    protected UserRole role;
+
+    public User(){
+        this.role = UserRole.Guest;
+    }
+
+    public User(String name, String email, String password){
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         this.name = name;
         this.email = email;
         this.password = passwordEncoder.encode(password);
+        this.role = UserRole.User;
     }
 
     public void setPassword(String password){
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         this.password = passwordEncoder.encode(password);
+    }
+
+    public void setRole(String newRole){
+        switch (newRole){
+            case "Guest": {
+                this.role = UserRole.Guest;
+                break;
+            }
+            case "User": {
+                this.role = UserRole.User;
+                break;
+            }
+            case "Operator": {
+                this.role = UserRole.Operator;
+                break;
+            }
+            case "Administrator": {
+                this.role = UserRole.Administrator;
+                break;
+            }
+            default:
+                this.role = UserRole.Guest;
+        }
     }
 
     @OneToMany(mappedBy = "user",
@@ -60,4 +89,11 @@ public class User {
         dictionaries.remove(dictionary);
         dictionary.setUser(null);
     }
+}
+
+enum UserRole{
+    Guest,
+    User,
+    Operator,
+    Administrator
 }
