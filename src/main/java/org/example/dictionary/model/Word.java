@@ -9,7 +9,6 @@ import lombok.Data;
 @Data
 public class Word {
     @Id
-    @NotEmpty(message = "Word Id can not be null")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long wordId;
 

@@ -15,7 +15,6 @@ import java.util.Objects;
 @Data
 public class Dictionary {
     @Id
-    @NotEmpty(message = "Dictionary Id can not be null")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long dictionaryId;
 
