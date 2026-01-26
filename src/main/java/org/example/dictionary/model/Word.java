@@ -21,6 +21,5 @@ public class Word {
     protected String word;
     protected String translation;
     protected String grammaticalCategory;
-    protected String description; //Delete
     protected String complexity;
 }
