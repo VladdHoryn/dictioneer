@@ -66,4 +66,17 @@ public class wordServiceTest {
         assertEquals("new", existing.getWord());
         verify(wordRepository).save(updated);
     }
+
+    @Test
+    void deleteWordByIdTest_shouldDelete(){
+        long wordId = 0;
+        Word word = new Word();
+
+        when(wordRepository.findById(wordId))
+                .thenReturn(Optional.of(word));
+
+        wordService.deleteWordById(wordId);
+
+        verify(wordRepository).delete(word);
+    }
 }
