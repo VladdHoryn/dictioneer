@@ -3,10 +3,14 @@ package org.example.dictionary.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Word {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +25,18 @@ public class Word {
     protected String word;
     protected String translation;
     protected String grammaticalCategory;
-    protected String description;
     protected String complexity;
+
+    public Word(Dictionary dictionary,
+                String word,
+                String translation,
+                String grammaticalCategory,
+                String complexity) {
+
+        this.dictionary = dictionary;
+        this.word = word;
+        this.translation = translation;
+        this.grammaticalCategory = grammaticalCategory;
+        this.complexity = complexity;
+    }
 }
