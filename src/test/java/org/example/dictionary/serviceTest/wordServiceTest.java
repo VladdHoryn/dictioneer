@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -78,5 +79,16 @@ public class wordServiceTest {
         wordService.deleteWordById(wordId);
 
         verify(wordRepository).delete(word);
+    }
+
+    @Test
+    void deleteWordByIdTest_shouldThrowException(){
+        long wordId = 0;
+
+        when(wordRepository.findById(wordId))
+                .thenReturn(Optional.empty());
+
+
+        assertThrows(RuntimeException.class, () -> wordService.deleteWordById(wordId));
     }
 }
