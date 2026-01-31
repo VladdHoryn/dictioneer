@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -49,6 +50,20 @@ public class wordServiceTest {
 
     @Test
     void updateWordTest_shouldUpdate(){
+        long wordId = 0;
+        Dictionary dictionary = new Dictionary();
+        Word existing = new Word();
+        existing.setWord("old");
 
+        Word updated = new Word();
+        updated.setWord("new");
+
+        when(wordRepository.findById(wordId))
+                .thenReturn(Optional.of(existing));
+
+        wordService.updateWord(wordId, updated);
+
+        assertEquals("new", existing.getWord());
+        verify(wordRepository).save(updated);
     }
 }
