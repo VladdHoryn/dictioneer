@@ -33,7 +33,6 @@ public class WordService {
         wordToChange.setWord(word.getWord());
         wordToChange.setTranslation(word.getTranslation());
         wordToChange.setGrammaticalCategory(word.getGrammaticalCategory());
-        wordToChange.setDescription(word.getDescription());
         wordToChange.setComplexity(word.getComplexity());
 
         wordRepository.save(wordToChange);
