@@ -9,19 +9,5 @@
 //
 //@Service
 //public class UserDetailsServiceImpl {
-//    @Autowired
-//    UserRepository userRepository;
-//
-//    @Override
-//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        System.out.println("DEBUG: Пошук користувача за email: " + email);
-//        User user = userRepository.findByEmail(email);
-//        if (user == null) {
-//            System.out.println("DEBUG: Користувач не знайдений!");
-//            throw new UsernameNotFoundException("User not found");
-//        }
-//        System.out.println("DEBUG: Користувач знайдений: " + user.getEmail());
-//        System.out.println("DEBUG: Його хеш пароля: " + user.getPassword());
-//        return UserDetailsImpl.build(user);
-//    }
+
 //}
