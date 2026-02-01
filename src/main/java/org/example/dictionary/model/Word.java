@@ -3,6 +3,7 @@ package org.example.dictionary.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Access(AccessType.FIELD)
 public class Word {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +21,7 @@ public class Word {
     @ManyToOne
     @JoinColumn(name = "dictionary_id")
     @JsonIgnore
-    @NotEmpty(message = "Word required to have dictionary")
+    @NotNull(message = "Word required to have dictionary")
     protected Dictionary dictionary;
 
     protected String word;
